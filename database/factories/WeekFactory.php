@@ -17,7 +17,10 @@ class WeekFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            // 'title' => fake()->sentence(5),
+            // 'study_plan_file' => fake()->url(),
+            // 'order' => 0,
+            // 'week_number' => 
         ];
     }
 }

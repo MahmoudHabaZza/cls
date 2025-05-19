@@ -20,7 +20,6 @@ return new class extends Migration
             $table->unsignedTinyInteger('week_number');
             $table->foreignIdFor(Course::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
-
             $table->index(['order','course_id']);
         });
     }
