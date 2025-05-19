@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -12,6 +14,40 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
+
+    public function courses():BelongsToMany{
+        return $this->belongsToMany(Course::class,'enrollments')
+                    ->using(Enrollment::class)
+                    ->withPivot(['enrolled_at','progress']);
+    }
+
+
+    public function enrollments():HasMany{
+        return $this->hasMany(Enrollment::class);
+    }
+
+    public function certificates():HasMany{
+        return $this->hasMany(Certificate::class);
+    }
+
+    public function certifiedCourses():BelongsToMany{
+        return $this->belongsToMany(Course::class,'certificates')
+                    ->using(Certificate::class)
+                    ->withPivot(['certificated_at','certificate_file_path'])
+                    ->withTimestamps();
+    }
+
+
+    public function sessionCompletions():HasMany{
+        return $this->hasMany(SessionCompletion::class);
+    }
+
+    public function completedCourseSessions():BelongsToMany{
+        return $this->belongsToMany(CourseSession::class,'session_completions')
+                    ->using(SessionCompletion::class)
+                    ->withPivot('completed_at')
+                    ->withTimestamps();
+    }
     /**
      * The attributes that are mass assignable.
      *
@@ -21,6 +57,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role'
     ];
 
     /**

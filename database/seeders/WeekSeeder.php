@@ -17,7 +17,7 @@ class WeekSeeder extends Seeder
         $courseIds = Course::pluck('id');
 
         foreach($courseIds as $courseId){
-            for($i = 1;$i <= rand(5,30);$i++){
+            for($i = 1;$i <= rand(5,12);$i++){
                 Week::create([
                     'title' => fake()->sentence(5),
                     'study_plan_file' => fake()->url(),

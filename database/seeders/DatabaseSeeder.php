@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             CourseSeeder::class,
             WeekSeeder::class,
             CourseSessionSeeder::class,
+            TaskSeeder::class,
         ]);
     }
 }
