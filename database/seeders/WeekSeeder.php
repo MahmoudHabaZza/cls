@@ -14,16 +14,16 @@ class WeekSeeder extends Seeder
      */
     public function run(): void
     {
-        $courses = Course::get();
+        $courseIds = Course::pluck('id');
 
-        foreach($courses as $course){
+        foreach($courseIds as $courseId){
             for($i = 1;$i <= rand(5,30);$i++){
                 Week::create([
                     'title' => fake()->sentence(5),
                     'study_plan_file' => fake()->url(),
                     'order' => $i,
                     'week_number' => $i,
-                    'course_id' => $course->id,
+                    'course_id' => $courseId,
                 ]);
             }
         }
