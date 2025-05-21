@@ -10,7 +10,11 @@ use App\Repositories\Interfaces\CertificateRepositoryInterface;
 use App\Repositories\Interfaces\CourseRepositoryInterface;
 use App\Repositories\Interfaces\CourseSessionRepositoryInterface;
 use App\Repositories\Interfaces\EnrollmentRepositoryInterface;
+use App\Repositories\Interfaces\SessionCompletionRepositoryInterface;
+use App\Repositories\Interfaces\TaskRepositoryInterface;
 use App\Repositories\Interfaces\WeekRepositoryInterface;
+use App\Repositories\SessionCompletionRepository;
+use App\Repositories\TaskRepository;
 use App\Repositories\WeekRepository;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,6 +30,8 @@ class RepositoryServiceProvider extends ServiceProvider
         app()->bind(CourseSessionRepositoryInterface::class,CourseSessionRepository::class);
         app()->bind(EnrollmentRepositoryInterface::class,EnrollmentRepository::class);
         app()->bind(CertificateRepositoryInterface::class,CertificateRepository::class);
+        app()->bind(TaskRepositoryInterface::class,TaskRepository::class);
+        app()->bind(SessionCompletionRepositoryInterface::class,SessionCompletionRepository::class);
     }
 
     /**

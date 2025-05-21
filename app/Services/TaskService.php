@@ -2,13 +2,10 @@
 
 namespace App\Services;
 
-use App\Repositories\Interfaces\CourseSessionRepositoryInterface;
+use App\Repositories\Interfaces\TaskRepositoryInterface;
 
-class CourseSessionService {
-    public function __construct(public CourseSessionRepositoryInterface $repository) { // model binding => service container
-    }
-    public function getWeek($courseSessionId){
-        return $this->repository->getWeek($courseSessionId);
+class TaskService {
+    public function __construct(public TaskRepositoryInterface $repository) { // model binding => service container
     }
     public function getAll()
     {

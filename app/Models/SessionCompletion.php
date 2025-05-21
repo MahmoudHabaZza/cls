@@ -11,6 +11,7 @@ class SessionCompletion extends Pivot
 {
     /** @use HasFactory<\Database\Factories\SessionCompletionFactory> */
     use HasFactory;
+    protected $table = 'session_completions';
     protected $fillable = [
         'user_id',
         'course_session_id', // matches your schema

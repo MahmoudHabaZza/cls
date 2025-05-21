@@ -19,12 +19,13 @@ class CertificateService {
 
         $enrollment = $user->courses()->where('course_id', $courseId)->first();
         if (!$enrollment || $enrollment->pivot->progress < 100) {
-            return response()->json(['error' => 'Course not completed.'], 403);
+            return ['error' => 'Course not completed.', 'status' => 403];
+
         }
 
         $existing = $this->repository->getByUserAndCourse($user->id, $courseId);
         if ($existing) {
-            return Storage::download($existing->certificate_file_path);
+            return $existing;
         }
 
         $pdf = Pdf::loadView('pdf-templates.certificate', [
@@ -34,15 +35,18 @@ class CertificateService {
         ]);
 
         $path = "certificates/{$user->id}_{$courseId}_certificate.pdf";
-        Storage::put($path, $pdf->output());
+        Storage::disk('public')->put($path, $pdf->output());
+        
 
-        $this->repository->create([
+        $certificate = $this->repository->create([
             'user_id' => $user->id,
             'course_id' => $courseId,
             'certificated_at' => now(),
             'certificate_file_path' => $path
         ]);
 
-        return Storage::download($path);
+        return $certificate;
+
+        
     }
 }

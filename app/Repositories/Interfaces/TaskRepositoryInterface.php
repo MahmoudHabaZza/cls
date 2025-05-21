@@ -2,10 +2,7 @@
 
 namespace App\Repositories\Interfaces;
 
-interface WeekRepositoryInterface {
-    public function getCourse($weekId);
-    public function getSessions($weekId);
-    public function getByCourseId(int $courseId);
+interface TaskRepositoryInterface {
     public function getAll();
     public function getById($id);
     public function create($data);

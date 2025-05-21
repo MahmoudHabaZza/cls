@@ -16,7 +16,7 @@ class Task extends Model
         'order',
         'course_session_id'
     ];
-    public function course_session(): BelongsTo
+    public function courseSession(): BelongsTo
     {
         return $this->belongsTo(CourseSession::class);
     }

@@ -19,6 +19,21 @@ class EnrollmentRepository implements EnrollmentRepositoryInterface
         ]);
     }
 
+    public function isUserEnrolledInCourse($userId, $courseId): bool
+    {
+        return Enrollment::where('user_id', $userId)
+            ->where('course_id', $courseId)
+            ->exists();
+    }
+
+    public function getEnrollment($userId, $courseId)
+    {
+        return Enrollment::where('user_id', $userId)
+            ->where('course_id', $courseId)
+            ->first();
+    }
+
+
     public function filterEnrollments(Request $request)
     {
         $query = Enrollment::with(['user', 'course'])

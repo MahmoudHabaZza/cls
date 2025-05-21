@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class WeekResource extends JsonResource
+class TaskResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,13 +15,13 @@ class WeekResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
             'title' => $this->title,
-            'study_plan_file' =>$this->study_plan_file,
+            'description' => $this->description,
             'order' => $this->order,
-            'week_number' => $this->week_number,
-            'course_id' => $this->course_id,
-            'course_name' => $this->course->name
+            'course_session_id' => $this->course_session_id,
+            'session_name' => $this->courseSession->name,
+            'week_name' => $this->courseSession->week->title,
+            'course_name' => $this->courseSession->week->course->name,
         ];
     }
 }

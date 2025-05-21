@@ -20,6 +20,10 @@ class WeekRepository implements WeekRepositoryInterface
         if(!$week)return Response::errorResponse('Week Not Found',404);
         return $week->courseSessions;
     }
+    public function getByCourseId(int $courseId)
+    {
+        return Week::where('course_id', $courseId)->get();
+    }
     public function getAll()
     {
         return Week::paginate();
