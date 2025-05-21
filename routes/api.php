@@ -42,6 +42,10 @@ Route::middleware('auth:sanctum')->group(function(){
         Route::apiResource('courses',CourseController::class)->except(['index','show']);
         Route::get('courses/get-weeks/{course_id}',[CourseController::class,'getWeeks']);
     
+
+        // enrollment overview
+        Route::get('enrollments',[EnrollmentController::class,'search']);
+
         Route::apiResource('weeks',WeekController::class);
         Route::get('weeks/get-course/{week_id}',[WeekController::class,'getCourse']);
         Route::get('weeks/get-sessions/{week_id}',[WeekController::class,'getSessions']);

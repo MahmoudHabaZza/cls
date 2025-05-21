@@ -11,6 +11,7 @@ class Enrollment extends Pivot
 {
     /** @use HasFactory<\Database\Factories\EnrollmentFactory> */
     use HasFactory;
+    protected $table = 'enrollments';
     protected $fillable = [
         'user_id',
         'course_id',
