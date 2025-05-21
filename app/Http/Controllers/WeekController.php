@@ -2,33 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\WeekRequest;
 use App\Models\Week;
+use App\Services\WeekService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class WeekController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function __construct(public WeekService $service)
     {
-        //
+        
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+    public function getCourse($weekId){
+        return Response::respondSingleCollection('CourseResource',$this->service->getCourse($weekId));
     }
+    public function getSessions($weekId){
+        return Response::respondCollection('CourseSessionResource',$this->service->getSessions($weekId));
+    }
+    public function index()
+    {
+        return Response::respondCollection('WeekResource',$this->service->getAll());
+    }
+
+    
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(WeekRequest $request)
     {
-        //
+        return Response::createdResponse('WeekResource',$this->service->create($request->validated()));
     }
 
     /**
@@ -36,30 +41,25 @@ class WeekController extends Controller
      */
     public function show(Week $week)
     {
-        //
+        return Response::respondSingleCollection('WeekResource',$this->service->getById($week->id));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Week $week)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Week $week)
+    public function update(WeekRequest $request, Week $week)
     {
-        //
+        $this->service->update($week->id,$request->validated());
+        return Response::respondNoContent("Updated Successfully!");
     }
-
+    
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Week $week)
     {
-        //
+        $this->service->delete($week->id);
+        return Response::respondNoContent("Deleted Successfully!");
     }
 }

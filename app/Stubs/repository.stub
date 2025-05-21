@@ -1,0 +1,28 @@
+<?php
+
+namespace App\Repositories;
+
+use App\Models\{{ model }};
+use App\Repositories\Interfaces\{{ model }}RepositoryInterface;
+
+class {{ model }}Repository implements {{ model }}RepositoryInterface{
+    public function getAll()
+    {
+        return {{ model }}::paginate();
+    }
+    public function getById($id){
+        $camelCase = {{ model }}::findOrFail($id);
+        return $camelCase;
+    }
+    public function create($data){
+        return {{ model }}::create($data);
+    }
+    public function update($id,$data){
+        $camelCase = {{ model }}::findOrFail($id)->update($data);
+        return $camelCase;
+    }
+    public function delete($id){
+        $camelCase = {{ model }}::findOrFail($id)->delete();
+        return $camelCase;
+    }
+}

@@ -25,6 +25,6 @@ class Week extends Model
 
     public function courseSessions(): HasMany
     {
-        return $this->hasMany(CourseSession::class, 'course_session_id')->orderBy('order');
+        return $this->hasMany(CourseSession::class, 'week_id')->orderBy('order');
     }
 }

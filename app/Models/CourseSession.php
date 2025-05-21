@@ -13,12 +13,11 @@ class CourseSession extends Model
     /** @use HasFactory<\Database\Factories\SessionFactory> */
     use HasFactory;
     protected $fillable = [
-        'name',
-        'description',
-        'level',
-        'price',
-        'sessions_count',
-        'thumbnail'
+        "name",
+        "description",
+        "order",
+        "available",
+        "week_id"
     ];
     public function week(): BelongsTo
     {
